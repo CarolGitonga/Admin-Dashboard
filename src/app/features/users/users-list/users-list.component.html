@@ -1,0 +1,29 @@
+<div class="header-row">
+  <h2>Users</h2>
+  <button (click)="onCreateUser()">+ Add User</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- temporary mock data -->
+    <tr *ngFor="let user of mockUsers; index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button (click)="onView(user.id)">View</button>
+        <button (click)="onEdit(user.id)">Edit</button>
+        <button (click)="onDelete(user.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

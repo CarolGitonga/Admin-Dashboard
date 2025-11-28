@@ -1,0 +1,18 @@
+
+<div class="layout">
+  <header class="topbar">
+    <h1>Admin Dashboard</h1>
+  </header>
+
+  <div class="content">
+    <nav class="sidebar">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/users" routerLinkActive="active">Users</a>
+      <!-- later: products, settings, etc -->
+    </nav>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
