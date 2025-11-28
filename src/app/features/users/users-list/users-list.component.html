@@ -2,8 +2,16 @@
   <h2>Users</h2>
   <button (click)="onCreateUser()">+ Add User</button>
 </div>
+<!-- Loading state -->
+<div *ngIf="loading">
+  <p>Loading users...</p>
+</div>
+<!-- Error state -->
+<div *ngIf="error">
+  <p style="color: red;">Failed to load users. Try again later.</p>
+</div>
 
-<table class="table">
+<table *ngIf="!loading && !error" class="table">
   <thead>
     <tr>
       <th>#</th>
@@ -13,8 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <!-- temporary mock data -->
-    <tr *ngFor="let user of mockUsers; index as i">
+    <tr *ngFor="let user of users; index as i">
       <td>{{ i + 1 }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>

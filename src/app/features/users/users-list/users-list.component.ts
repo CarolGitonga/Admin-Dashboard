@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { NgForOf } from '@angular/common';
+import { UserService } from '../../../core/services/user.service';
 
 interface User {
   id: number;
@@ -10,17 +11,29 @@ interface User {
 
 @Component({
   selector: 'app-users-list',
-  imports: [NgForOf],
+  imports: [NgFor, NgIf],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss'
 })
-export class UsersListComponent {
-  mockUsers: User[] =[
-    { id: 1, name: 'Alice Admin', email: 'alice@example.com' },
-    { id: 2, name: 'Bob Manager', email: 'bob@example.com' },
-    { id: 3, name: 'Carol User', email: 'carol@example.com' },
-  ];
-  constructor(private router: Router) {}
+
+export class UsersListComponent implements OnInit {
+  users: User[] = [];
+  loading = true;
+  error = false;
+
+  constructor(private router: Router, private userService: UserService) {}
+  ngOnInit(){
+    this.userService.getUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      }
+    });
+  }
 
   onCreateUser() {
     // later: navigate to /users/create
@@ -28,11 +41,11 @@ export class UsersListComponent {
   }
   onView(id: number) {
     console.log('View user', id);
-    // later: this.router.navigate(['/users', id]);
+    this.router.navigate(['/users', id]);
   }
   onEdit(id: number) {
     console.log('Edit user', id);
-    // later: this.router.navigate(['/users', id, 'edit']);
+    this.router.navigate(['/users', id, 'edit']);
   }
    onDelete(id: number) {
     console.log('Delete user', id);
