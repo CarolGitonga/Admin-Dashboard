@@ -1,0 +1,32 @@
+<div *ngIf="loading">
+  <p>Loading user details...</p>
+</div>
+
+<div *ngIf="error">
+  <p style="color: red;">Failed to load the user. Please try again.</p>
+  <button (click)="goBack()">Back to Users</button>
+</div>
+
+<div *ngIf="!loading && !error" class="details-card">
+
+  <h2>{{ user.name }}</h2>
+
+  <div class="info-grid">
+    <div>
+      <strong>Email:</strong>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <div>
+      <strong>Phone:</strong>
+      <p>{{ user.phone }}</p>
+    </div>
+
+    <div>
+      <strong>Website:</strong>
+      <p>{{ user.website }}</p>
+    </div>
+  </div>
+
+  <button (click)="goBack()" class="back-btn">Back</button>
+</div>
