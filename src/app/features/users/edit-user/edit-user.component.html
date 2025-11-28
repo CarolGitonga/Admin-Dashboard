@@ -1,0 +1,42 @@
+<div *ngIf="loading">
+  <p>Loading user...</p>
+</div>
+
+<div *ngIf="error">
+  <p style="color: red;">Failed to load user.</p>
+  <button (click)="goBack()">Back</button>
+</div>
+
+<form *ngIf="!loading && !error" [formGroup]="form" (ngSubmit)="onSave()" class="form">
+
+  <h2>Edit User</h2>
+
+  <label>
+    Name
+    <input type="text" formControlName="name">
+    <span class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+      Name is required
+    </span>
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email">
+    <span class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      Valid email is required
+    </span>
+  </label>
+
+  <label>
+    Phone
+    <input type="text" formControlName="phone">
+  </label>
+
+  <label>
+    Website
+    <input type="text" formControlName="website">
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Save Changes</button>
+  <button type="button" (click)="goBack()">Cancel</button>
+</form>

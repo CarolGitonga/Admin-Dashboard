@@ -36,8 +36,8 @@ export class UsersListComponent implements OnInit {
   }
 
   onCreateUser() {
-    // later: navigate to /users/create
-    console.log('Create user clicked');
+    this.router.navigate(['/users/create']);
+    
   }
   onView(id: number) {
     console.log('View user', id);

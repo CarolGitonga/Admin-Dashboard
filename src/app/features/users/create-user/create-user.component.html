@@ -1,0 +1,34 @@
+<h2>Create User</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+  <label>
+    Name
+    <input type="text" formControlName="name">
+    <span class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+      Name is required
+    </span>
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email">
+    <span class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      Valid email is required
+    </span>
+  </label>
+
+  <label>
+    Phone
+    <input type="text" formControlName="phone">
+  </label>
+
+  <label>
+    Website
+    <input type="text" formControlName="website">
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Create User</button>
+
+</form>
+
